@@ -30,7 +30,7 @@ function reducer(state, action) {
       return { ...state, status: "active" };
 
     case "newAnswer":
-      const question = state.question.at(state.index);
+      const question = state.questions.at(state.index);
 
       return { ...state, answer: action.payload, points: question === action.payload ? state.points + question.point : state.points };
 
@@ -64,7 +64,8 @@ export default function App() {
         {status === "ready" && <StartScreen numQuestions={numQuestions} dispatch={dispatch} />}
         {status === "active" && (
           <>
-            <Question question={questions[index]} dispatch={dispatch} answer={answer} /> <NextButton dispatch={dispatch} answer={answer} />
+            <Question question={questions[index]} dispatch={dispatch} answer={answer} />
+            <NextButton dispatch={dispatch} answer={answer} />
           </>
         )}
       </Main>
